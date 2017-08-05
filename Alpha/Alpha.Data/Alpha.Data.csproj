@@ -41,6 +41,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,11 +51,96 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalUserInfo.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AgeRanx.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlphaEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlphaEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlphaEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlphaEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlphaEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AuditLog.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuditType.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryItem.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comment.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DebugLog.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gender.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rate.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="State.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubCategory.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Title.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserType.cs">
+      <DependentUpon>AlphaEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="AlphaEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AlphaEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AlphaEntities.edmx.diagram">
+      <DependentUpon>AlphaEntities.edmx</DependentUpon>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AlphaEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AlphaEntities.edmx</DependentUpon>
+      <LastGenOutput>AlphaEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AlphaEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AlphaEntities.edmx</DependentUpon>
+      <LastGenOutput>AlphaEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
