@@ -1,0 +1,98 @@
+﻿@model Alpha.Web.ViewModels.Home.IndexViewModel
+@using Alpha.DataAccessObject.Enums
+@{
+    ViewBag.Title = "HomePage";
+}
+
+@section head {
+    <style>
+        .personal-info {
+            background-color: powderblue;
+            height: 400px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 200px;
+            width: 200px;
+            background-color: bisque;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }            
+            .card p {    
+                text-align: center;            
+                color: #ff0066;
+                font-size: 2em;                
+            }
+
+        .image {
+            height: 400px;
+        }
+
+        div[class$="card"] {
+            border: 1px red solid;
+            border-radius: 10px;
+        }
+
+        .profile-info h1 {
+            margin-top: 0px;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .placeholder-div {
+            height: 300px;
+            width: 100%;
+            background-color: antiquewhite;
+        }
+    </style>
+}
+<div class="container">
+    <h2 class="page-header">@Model.PageHeader</h2>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-5">
+            <img src="~/Content/Images/canon.jpg" alt="canon" />
+        </div>
+        <div class="col-xs-12 col-sm-6 sol-md-7 profile-info">
+            <h1 class="name">@Model.Name</h1>
+            <h1 class="school">@Model.Position (Umass-Amherst)</h1>
+            <h1 class="linkedin"><a href="https://www.linkedin.com/in/jingyu-xu-a5b417a1/" target="_blank">LinkedIn</a></h1>
+            <h1 class="github"><a href="https://github.com/jingyu-xu" target="_blank">Github</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="placeholder-div">This is currently just a placeholder</div>
+
+<div class="container">
+    <div class="cards-container">
+        @if (Model.Categories.Any())
+        {
+            foreach (var item in Model.Categories)
+            {
+                <a href="@Url.Action(((CategoryTypes)item.CategoryId).ToString(),"Home")"><div class="card" data-url=""><p>@item.Description</p></div></a>
+            }
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        //$(document).ready(function () {
+        //    $('.card').on('click', function () {
+        //        window.location = $(this).attr('data-url');
+        //    });
+        //});
+    </script>
+}

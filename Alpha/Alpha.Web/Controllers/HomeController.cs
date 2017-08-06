@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Alpha.Facade;
+using Alpha.Web.ViewModels.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,35 @@ namespace Alpha.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var vm = new IndexViewModel();
+            //GET data from database            
+            var response = AccountFacade.GetHomeIndex();
+            //do exception check
+            if(response.Success())
+            {
+                vm.Import(response.Item);
+            }
+            //put data into viewmodel
+
+            //return
+            return View(vm);
+        }
+
+        public ViewResult Web()
+        {
+            return null;
+        }
+        public ActionResult LeetCode()
+        {
+            return null;
+        }
+        public ActionResult DataScience()
+        {
+            return null;
+        }
+        public ActionResult Interview()
+        {
+            return null;
         }
 
         public ActionResult About()

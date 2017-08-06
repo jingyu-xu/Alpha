@@ -49,6 +49,10 @@
       <Project>{B0423661-662B-4D23-A543-99BF05241AF7}</Project>
       <Name>Alpha.DataAccessObject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alpha.DataAccess\Alpha.DataAccess.csproj">
+      <Project>{73925756-5991-431F-858C-14752B19B1AD}</Project>
+      <Name>Alpha.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

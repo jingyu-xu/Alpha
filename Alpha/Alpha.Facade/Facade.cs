@@ -10,16 +10,16 @@ namespace Alpha.Facade
 {
     public abstract class Facade
     {
-        protected TRequest CreateRequest<TRequest>() where TRequest : IRequest, new() => new TRequest();
+        protected static TRequest CreateRequest<TRequest>() where TRequest : IRequest, new() => new TRequest();
 
-        protected ItemRequest<TItem> CreateItemRequest<TItem>(TItem item)
+        protected static ItemRequest<TItem> CreateItemRequest<TItem>(TItem item)
         {
             var request = CreateRequest<ItemRequest<TItem>>();
             request.Item = item;
             return request;
         }
 
-        protected TRequest CreateSecureRequest<TRequest>(UserContext context)
+        protected static TRequest CreateSecureRequest<TRequest>(UserContext context)
             where TRequest: SecureRequest, new()
         {
             if (context == null) throw new ArgumentNullException("context");
@@ -28,14 +28,14 @@ namespace Alpha.Facade
             return request;
         }
 
-        protected SecureItemRequest<TItem> CreateSecureItemRequest<TItem>(TItem item, UserContext context)
+        protected static SecureItemRequest<TItem> CreateSecureItemRequest<TItem>(TItem item, UserContext context)
         {
             var request = CreateSecureRequest<SecureItemRequest<TItem>>(context);
             request.Item = item;
             return request;
         }
 
-        protected SecureItemAddRequest<TItem> CreateSecureItemAddRequest<TItem>(TItem item, Type type, string primaryKey, UserContext context)
+        protected static SecureItemAddRequest<TItem> CreateSecureItemAddRequest<TItem>(TItem item, Type type, string primaryKey, UserContext context)
         {
             var request = CreateSecureRequest<SecureItemAddRequest<TItem>>(context);
             request.Type = type;

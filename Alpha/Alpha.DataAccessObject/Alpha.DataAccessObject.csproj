@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\CategoryContract.cs" />
+    <Compile Include="Contracts\HomeIndexContract.cs" />
+    <Compile Include="Contracts\PersonalInfoContract.cs" />
+    <Compile Include="Enums\CategoryTypes.cs" />
     <Compile Include="Enums\StatusTypes.cs" />
     <Compile Include="Enums\UserTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,9 +61,7 @@
     <Compile Include="Responses\Response.cs" />
     <Compile Include="UserContext.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
