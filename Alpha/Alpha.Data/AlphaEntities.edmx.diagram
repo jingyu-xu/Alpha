@@ -4,40 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="52b78b171fe0459caf5454e3909e5075" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="WebPageModel.AdditionalUserInfo" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.AgeRanx" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.AuditLog" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.AuditType" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.Category" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.CategoryItem" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.Comment" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.Country" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.DebugLog" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.Gender" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.Rate" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.State" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.SubCategory" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.Title" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.User" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebPageModel.UserType" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
-        <AssociationConnector Association="WebPageModel.FK_AdditionalUserInfos_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Users_AgeRanges" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_AuditLogs_AuditTypes" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_AuditLogs_Comments" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_AuditLogs_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_SubCategories_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_CategoryItems_CategoryItems" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Comments_CategoryItems" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Rates_CategoryItems" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Comments_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_States_Countries" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_DebugLogs_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Users_Genders" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Rates_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Users_States" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Users_Titles" ManuallyRouted="false" />
-        <AssociationConnector Association="WebPageModel.FK_Users_UserTypes" ManuallyRouted="false" />
+      <Diagram DiagramId="7f1a8a90ba934b4ca7938d453a73af8c" Name="Diagram1">
+        <EntityTypeShape EntityType="AlphaModel.AdditionalUserInfo" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.AgeRanx" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.AuditLog" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.AuditType" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.Category" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.CategoryItem" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.Comment" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.Country" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.DebugLog" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.Gender" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.Rate" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.State" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.SubCategory" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.Title" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.User" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AlphaModel.UserType" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="AlphaModel.FK_AdditionalUserInfos_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Users_AgeRanges" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_AuditLogs_AuditTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_AuditLogs_Comments" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_AuditLogs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_SubCategories_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_CategoryItems_CategoryItems" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Comments_CategoryItems" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Rates_CategoryItems" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Comments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_States_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_DebugLogs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Users_Genders" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Rates_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Users_States" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Users_Titles" ManuallyRouted="false" />
+        <AssociationConnector Association="AlphaModel.FK_Users_UserTypes" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

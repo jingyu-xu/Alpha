@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WebPageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AlphaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdditionalUserInfos">
           <Key>
             <PropertyRef Name="UserId" />
@@ -352,7 +352,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WebPageModelStoreContainer">
+        <EntityContainer Name="AlphaModelStoreContainer">
           <EntitySet Name="AdditionalUserInfos" EntityType="Self.AdditionalUserInfos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AgeRanges" EntityType="Self.AgeRanges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLogs" Schema="dbo" store:Type="Tables" />
@@ -442,7 +442,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="WebPageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="AlphaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AdditionalUserInfo">
           <Key>
             <PropertyRef Name="UserId" />
@@ -824,7 +824,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WebPageEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AlphaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdditionalUserInfos" EntityType="Self.AdditionalUserInfo" />
           <EntitySet Name="AgeRanges" EntityType="Self.AgeRanx" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
@@ -915,16 +915,16 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WebPageModelStoreContainer" CdmEntityContainer="WebPageEntities">
+        <EntityContainerMapping StorageEntityContainer="AlphaModelStoreContainer" CdmEntityContainer="AlphaEntities">
           <EntitySetMapping Name="AdditionalUserInfos">
-            <EntityTypeMapping TypeName="WebPageModel.AdditionalUserInfo">
+            <EntityTypeMapping TypeName="AlphaModel.AdditionalUserInfo">
               <MappingFragment StoreEntitySet="AdditionalUserInfos">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AgeRanges">
-            <EntityTypeMapping TypeName="WebPageModel.AgeRanx">
+            <EntityTypeMapping TypeName="AlphaModel.AgeRanx">
               <MappingFragment StoreEntitySet="AgeRanges">
                 <ScalarProperty Name="AgeRangeId" ColumnName="AgeRangeId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -932,7 +932,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AuditLogs">
-            <EntityTypeMapping TypeName="WebPageModel.AuditLog">
+            <EntityTypeMapping TypeName="AlphaModel.AuditLog">
               <MappingFragment StoreEntitySet="AuditLogs">
                 <ScalarProperty Name="AuditId" ColumnName="AuditId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -943,7 +943,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AuditTypes">
-            <EntityTypeMapping TypeName="WebPageModel.AuditType">
+            <EntityTypeMapping TypeName="AlphaModel.AuditType">
               <MappingFragment StoreEntitySet="AuditTypes">
                 <ScalarProperty Name="AuditTypeId" ColumnName="AuditTypeId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -951,7 +951,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="WebPageModel.Category">
+            <EntityTypeMapping TypeName="AlphaModel.Category">
               <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -959,7 +959,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CategoryItems">
-            <EntityTypeMapping TypeName="WebPageModel.CategoryItem">
+            <EntityTypeMapping TypeName="AlphaModel.CategoryItem">
               <MappingFragment StoreEntitySet="CategoryItems">
                 <ScalarProperty Name="CategoryItemId" ColumnName="CategoryItemId" />
                 <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
@@ -972,7 +972,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="WebPageModel.Comment">
+            <EntityTypeMapping TypeName="AlphaModel.Comment">
               <MappingFragment StoreEntitySet="Comments">
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -983,7 +983,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="WebPageModel.Country">
+            <EntityTypeMapping TypeName="AlphaModel.Country">
               <MappingFragment StoreEntitySet="Countries">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -992,7 +992,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DebugLogs">
-            <EntityTypeMapping TypeName="WebPageModel.DebugLog">
+            <EntityTypeMapping TypeName="AlphaModel.DebugLog">
               <MappingFragment StoreEntitySet="DebugLogs">
                 <ScalarProperty Name="DebugLogId" ColumnName="DebugLogId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1004,7 +1004,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Genders">
-            <EntityTypeMapping TypeName="WebPageModel.Gender">
+            <EntityTypeMapping TypeName="AlphaModel.Gender">
               <MappingFragment StoreEntitySet="Genders">
                 <ScalarProperty Name="GenderId" ColumnName="GenderId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1012,7 +1012,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rates">
-            <EntityTypeMapping TypeName="WebPageModel.Rate">
+            <EntityTypeMapping TypeName="AlphaModel.Rate">
               <MappingFragment StoreEntitySet="Rates">
                 <ScalarProperty Name="RateId" ColumnName="RateId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1022,7 +1022,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="WebPageModel.State">
+            <EntityTypeMapping TypeName="AlphaModel.State">
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -1032,7 +1032,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategories">
-            <EntityTypeMapping TypeName="WebPageModel.SubCategory">
+            <EntityTypeMapping TypeName="AlphaModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategories">
                 <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -1041,7 +1041,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Titles">
-            <EntityTypeMapping TypeName="WebPageModel.Title">
+            <EntityTypeMapping TypeName="AlphaModel.Title">
               <MappingFragment StoreEntitySet="Titles">
                 <ScalarProperty Name="TitleId" ColumnName="TitleId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1049,7 +1049,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="WebPageModel.User">
+            <EntityTypeMapping TypeName="AlphaModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1068,7 +1068,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserTypes">
-            <EntityTypeMapping TypeName="WebPageModel.UserType">
+            <EntityTypeMapping TypeName="AlphaModel.UserType">
               <MappingFragment StoreEntitySet="UserTypes">
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

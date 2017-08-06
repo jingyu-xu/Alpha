@@ -40,7 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\StatusTypes.cs" />
+    <Compile Include="Enums\UserTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\IAddRequest.cs" />
+    <Compile Include="Requests\IRequest.cs" />
+    <Compile Include="Requests\ISecureRequest.cs" />
+    <Compile Include="Requests\ItemRequest.cs" />
+    <Compile Include="Requests\Request.cs" />
+    <Compile Include="Requests\SecureItemAddRequest.cs" />
+    <Compile Include="Requests\SecureItemRequest.cs" />
+    <Compile Include="Requests\SecureRequest.cs" />
+    <Compile Include="Responses\IResponse.cs" />
+    <Compile Include="Responses\ItemListResponse.cs" />
+    <Compile Include="Responses\ItemResponse.cs" />
+    <Compile Include="Responses\Response.cs" />
+    <Compile Include="UserContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

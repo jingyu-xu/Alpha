@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3856EA08-4557-4A0E-AC84-A032633B675D}</ProjectGuid>
+    <ProjectGuid>{73925756-5991-431F-858C-14752B19B1AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alpha.DataAccess</RootNamespace>
@@ -49,12 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountService.cs" />
+    <Compile Include="Common\AccessBase.cs" />
+    <Compile Include="Common\ActionData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alpha.DataAccessObject\Alpha.DataAccessObject.csproj">
+      <Project>{b0423661-662b-4d23-a543-99bf05241af7}</Project>
+      <Name>Alpha.DataAccessObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alpha.Data\Alpha.Data.csproj">
+      <Project>{ee7867d9-efa6-44af-9f48-ae868afe7de6}</Project>
+      <Name>Alpha.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

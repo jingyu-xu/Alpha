@@ -13,10 +13,10 @@ namespace Alpha.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WebPageEntities : DbContext
+    public partial class AlphaEntities : DbContext
     {
-        public WebPageEntities()
-            : base("name=WebPageEntities")
+        public AlphaEntities()
+            : base("name=AlphaEntities")
         {
         }
     
