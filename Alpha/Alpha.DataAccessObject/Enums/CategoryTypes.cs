@@ -8,7 +8,7 @@ namespace Alpha.DataAccessObject.Enums
 {
     public enum CategoryTypes
     {
-        Web = 1,
+        WebDevelopment = 1,
         LeetCode = 2,
         DataScience = 3,
         Interview = 4

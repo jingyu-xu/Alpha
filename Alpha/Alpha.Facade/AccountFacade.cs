@@ -1,5 +1,6 @@
 ﻿using Alpha.DataAccess;
 using Alpha.DataAccessObject.Contracts;
+using Alpha.DataAccessObject.Enums;
 using Alpha.DataAccessObject.Requests;
 using Alpha.DataAccessObject.Responses;
 using System;
@@ -15,6 +16,11 @@ namespace Alpha.Facade
         public static ItemResponse<HomeIndexContract> GetHomeIndex()
         {
             return new AccountService().GetHomeIndex(CreateRequest<Request>());
+        }
+
+        public static ItemListResponse<SubCategoryContract> GetSubCategoryByCategoryId(CategoryTypes type)
+        {            
+            return new AccountService().GetSubCategoryByCategoryId(CreateItemRequest(type));
         }
     }
 }

@@ -81,7 +81,7 @@
         {
             foreach (var item in Model.Categories)
             {
-                <a href="@Url.Action(((CategoryTypes)item.CategoryId).ToString(),"Home")"><div class="card" data-url=""><p>@item.Description</p></div></a>
+                <a href="@Url.Action("Index",((CategoryTypes)item.CategoryId).ToString())"><div class="card" data-url=""><p>@item.Description</p></div></a>
             }
         }
     </div>

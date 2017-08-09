@@ -1,0 +1,44 @@
+﻿
+@model Alpha.Web.ViewModels.WebDevelopment.IndexViewModel
+@using Alpha.DataAccessObject.Enums
+@{
+    ViewBag.Title = "Index";
+}
+@section head {
+    <style>
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .card {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 100px;
+            width: 200px;
+            background-color: bisque;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        div[class$="card"] {
+            border: 1px red solid;
+            border-radius: 10px;
+        }            
+    </style>
+    }
+    
+}
+<div class="container">
+    <h1 class="page-header">@Model.PageHeader</h1>
+    <div class="cards-container">        
+        @if (Model.SubCategories.Any())
+        {
+            foreach (var item in Model.SubCategories)
+            {
+                <a href="@Url.Action("Index", ((SubCategoryTypes)item.SubCategoryId)).ToString())"><div class="card" data-url= ""><p> @item.Description</p></div></a>
+            }
+        }
+    </div>    
+</div>
+

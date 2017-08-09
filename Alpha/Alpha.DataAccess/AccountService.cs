@@ -20,5 +20,16 @@ namespace Alpha.DataAccess
                 data.Response.Item.PersonalInfo = new PersonalInfoContract() { Name = "Jingyu Xu", CurrentPosition = "Student" };
                 data.Response.Status = StatusTypes.Success;
             });
+        public ItemListResponse<SubCategoryContract> GetSubCategoryByCategoryId(ItemRequest<CategoryTypes> request) =>
+            PerfomeGet<ItemRequest<CategoryTypes>, ItemListResponse<SubCategoryContract>>(request, (data) =>{
+
+                data.Response.Items = data.Entities.SubCategories.Where(n => n.CategoryId == (int)request.Item)
+                                                                .Select(n => new SubCategoryContract() {
+                                                                    SubCategoryId = n.SubCategoryId,
+                                                                    Description = n.Description
+                                                                }).ToList();
+
+                data.Response.Status = StatusTypes.Success;
+            });
     }
 }

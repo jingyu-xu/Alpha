@@ -24,24 +24,7 @@ namespace Alpha.Web.Controllers
 
             //return
             return View(vm);
-        }
-
-        public ViewResult Web()
-        {
-            return null;
-        }
-        public ActionResult LeetCode()
-        {
-            return null;
-        }
-        public ActionResult DataScience()
-        {
-            return null;
-        }
-        public ActionResult Interview()
-        {
-            return null;
-        }
+        }       
 
         public ActionResult About()
         {

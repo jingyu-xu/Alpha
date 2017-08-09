@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section head {
+    <style>
+        .cards-container{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .card{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 100px;
+            width: 200px;
+            background-color: bisque;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        div[class$="card"] {
+            border: 1px red solid;
+            border-radius: 10px;
+        }
+    </style>
+    }
+    <div class="container">
+        <h1 class="page-header">LeetCode</h1>
+        <div class="cards-container">
+            <div class="card">Algorithm</div>
+            <div class="card">DataBase</div>
+            <div class="card">SystemDesign</div>
+        </div>
+    </div>
+    
+
