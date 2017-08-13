@@ -18,9 +18,9 @@ namespace Alpha.Data
         public User()
         {
             this.AuditLogs = new HashSet<AuditLog>();
-            this.Comments = new HashSet<Comment>();
             this.DebugLogs = new HashSet<DebugLog>();
-            this.Rates = new HashSet<Rate>();
+            this.Comments = new HashSet<Comment>();
+            this.QuestionContentVotes = new HashSet<QuestionContentVote>();
         }
     
         public int UserId { get; set; }
@@ -42,14 +42,14 @@ namespace Alpha.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuditLog> AuditLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DebugLog> DebugLogs { get; set; }
         public virtual Gender Gender { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rate> Rates { get; set; }
         public virtual State State { get; set; }
         public virtual Title Title { get; set; }
         public virtual UserType UserType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionContentVote> QuestionContentVotes { get; set; }
     }
 }

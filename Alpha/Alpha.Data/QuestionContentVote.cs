@@ -12,14 +12,14 @@ namespace Alpha.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Rate
+    public partial class QuestionContentVote
     {
-        public int RateId { get; set; }
-        public int UserId { get; set; }
-        public int CategoryItemId { get; set; }
+        public int QuestionContentVoteId { get; set; }
+        public int QuestionContentId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public int Score { get; set; }
     
-        public virtual CategoryItem CategoryItem { get; set; }
+        public virtual QuestionContent QuestionContent { get; set; }
         public virtual User User { get; set; }
     }
 }

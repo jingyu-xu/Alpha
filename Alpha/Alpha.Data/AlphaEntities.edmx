@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AlphaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AlphaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdditionalUserInfos">
           <Key>
             <PropertyRef Name="UserId" />
@@ -42,27 +42,15 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="CategoryItems">
-          <Key>
-            <PropertyRef Name="CategoryItemId" />
-          </Key>
-          <Property Name="CategoryItemId" Type="int" Nullable="false" />
-          <Property Name="SubCategoryId" Type="int" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="Question" Type="varchar" MaxLength="2000" Nullable="false" />
-          <Property Name="Answer" Type="varchar(max)" Nullable="false" />
-          <Property Name="VisitedCount" Type="int" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="CommentId" />
           </Key>
           <Property Name="CommentId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="CategoryItemId" Type="int" Nullable="false" />
           <Property Name="CommentContent" Type="varchar" MaxLength="2000" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="QuestionContentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -90,13 +78,24 @@
           <Property Name="GenderId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Rates">
+        <EntityType Name="QuestionContents">
           <Key>
-            <PropertyRef Name="RateId" />
+            <PropertyRef Name="QuestionContentId" />
           </Key>
-          <Property Name="RateId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="CategoryItemId" Type="int" Nullable="false" />
+          <Property Name="QuestionContentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubCategoryId" Type="int" Nullable="false" />
+          <Property Name="QuestionTiltle" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DateCreated" Type="date" Nullable="false" />
+          <Property Name="Answer" Type="varchar(max)" Nullable="false" />
+          <Property Name="QuestionDetail" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionContentVotes">
+          <Key>
+            <PropertyRef Name="QuestionContentVoteId" />
+          </Key>
+          <Property Name="QuestionContentVoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionContentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
           <Property Name="Score" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="States">
@@ -196,27 +195,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CategoryItems_CategoryItems">
-          <End Role="SubCategories" Type="Self.SubCategories" Multiplicity="1" />
-          <End Role="CategoryItems" Type="Self.CategoryItems" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubCategories">
-              <PropertyRef Name="SubCategoryId" />
-            </Principal>
-            <Dependent Role="CategoryItems">
-              <PropertyRef Name="SubCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comments_CategoryItems">
-          <End Role="CategoryItems" Type="Self.CategoryItems" Multiplicity="1" />
+        <Association Name="FK_Comments_QuestionContents">
+          <End Role="QuestionContents" Type="Self.QuestionContents" Multiplicity="1" />
           <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CategoryItems">
-              <PropertyRef Name="CategoryItemId" />
+            <Principal Role="QuestionContents">
+              <PropertyRef Name="QuestionContentId" />
             </Principal>
             <Dependent Role="Comments">
-              <PropertyRef Name="CategoryItemId" />
+              <PropertyRef Name="QuestionContentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -244,26 +231,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Rates_CategoryItems">
-          <End Role="CategoryItems" Type="Self.CategoryItems" Multiplicity="1" />
-          <End Role="Rates" Type="Self.Rates" Multiplicity="*" />
+        <Association Name="FK_QuestionContents_SubCategories">
+          <End Role="SubCategories" Type="Self.SubCategories" Multiplicity="1" />
+          <End Role="QuestionContents" Type="Self.QuestionContents" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CategoryItems">
-              <PropertyRef Name="CategoryItemId" />
+            <Principal Role="SubCategories">
+              <PropertyRef Name="SubCategoryId" />
             </Principal>
-            <Dependent Role="Rates">
-              <PropertyRef Name="CategoryItemId" />
+            <Dependent Role="QuestionContents">
+              <PropertyRef Name="SubCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Rates_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Rates" Type="Self.Rates" Multiplicity="*" />
+        <Association Name="FK_QuestionContentVotes_QuestionContents">
+          <End Role="QuestionContents" Type="Self.QuestionContents" Multiplicity="1" />
+          <End Role="QuestionContentVotes" Type="Self.QuestionContentVotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionContents">
+              <PropertyRef Name="QuestionContentId" />
+            </Principal>
+            <Dependent Role="QuestionContentVotes">
+              <PropertyRef Name="QuestionContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionContentVotes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="QuestionContentVotes" Type="Self.QuestionContentVotes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Rates">
+            <Dependent Role="QuestionContentVotes">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -358,12 +357,12 @@
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditTypes" EntityType="Self.AuditTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CategoryItems" EntityType="Self.CategoryItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DebugLogs" EntityType="Self.DebugLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rates" EntityType="Self.Rates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionContents" EntityType="Self.QuestionContents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionContentVotes" EntityType="Self.QuestionContentVotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategories" EntityType="Self.SubCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
@@ -385,12 +384,8 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="AuditLogs" EntitySet="AuditLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_CategoryItems_CategoryItems" Association="Self.FK_CategoryItems_CategoryItems">
-            <End Role="SubCategories" EntitySet="SubCategories" />
-            <End Role="CategoryItems" EntitySet="CategoryItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comments_CategoryItems" Association="Self.FK_Comments_CategoryItems">
-            <End Role="CategoryItems" EntitySet="CategoryItems" />
+          <AssociationSet Name="FK_Comments_QuestionContents" Association="Self.FK_Comments_QuestionContents">
+            <End Role="QuestionContents" EntitySet="QuestionContents" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
           <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
@@ -401,13 +396,17 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="DebugLogs" EntitySet="DebugLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rates_CategoryItems" Association="Self.FK_Rates_CategoryItems">
-            <End Role="CategoryItems" EntitySet="CategoryItems" />
-            <End Role="Rates" EntitySet="Rates" />
+          <AssociationSet Name="FK_QuestionContents_SubCategories" Association="Self.FK_QuestionContents_SubCategories">
+            <End Role="SubCategories" EntitySet="SubCategories" />
+            <End Role="QuestionContents" EntitySet="QuestionContents" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rates_Users" Association="Self.FK_Rates_Users">
+          <AssociationSet Name="FK_QuestionContentVotes_QuestionContents" Association="Self.FK_QuestionContentVotes_QuestionContents">
+            <End Role="QuestionContents" EntitySet="QuestionContents" />
+            <End Role="QuestionContentVotes" EntitySet="QuestionContentVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionContentVotes_Users" Association="Self.FK_QuestionContentVotes_Users">
             <End Role="Users" EntitySet="Users" />
-            <End Role="Rates" EntitySet="Rates" />
+            <End Role="QuestionContentVotes" EntitySet="QuestionContentVotes" />
           </AssociationSet>
           <AssociationSet Name="FK_States_Countries" Association="Self.FK_States_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -438,8 +437,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AlphaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -468,8 +466,8 @@
           <Property Name="AuditTypeId" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AuditType" Relationship="Self.FK_AuditLogs_AuditTypes" FromRole="AuditLogs" ToRole="AuditTypes" />
-          <NavigationProperty Name="Comment" Relationship="Self.FK_AuditLogs_Comments" FromRole="AuditLogs" ToRole="Comments" />
           <NavigationProperty Name="User" Relationship="Self.FK_AuditLogs_Users" FromRole="AuditLogs" ToRole="Users" />
+          <NavigationProperty Name="Comment" Relationship="AlphaModel.FK_AuditLogs_Comments" FromRole="AuditLog" ToRole="Comment" />
         </EntityType>
         <EntityType Name="AuditType">
           <Key>
@@ -486,34 +484,6 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategories_Categories" FromRole="Categories" ToRole="SubCategories" />
-        </EntityType>
-        <EntityType Name="CategoryItem">
-          <Key>
-            <PropertyRef Name="CategoryItemId" />
-          </Key>
-          <Property Name="CategoryItemId" Type="Int32" Nullable="false" />
-          <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Question" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="VisitedCount" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="SubCategory" Relationship="Self.FK_CategoryItems_CategoryItems" FromRole="CategoryItems" ToRole="SubCategories" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_CategoryItems" FromRole="CategoryItems" ToRole="Comments" />
-          <NavigationProperty Name="Rates" Relationship="Self.FK_Rates_CategoryItems" FromRole="CategoryItems" ToRole="Rates" />
-        </EntityType>
-        <EntityType Name="Comment">
-          <Key>
-            <PropertyRef Name="CommentId" />
-          </Key>
-          <Property Name="CommentId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="CategoryItemId" Type="Int32" Nullable="false" />
-          <Property Name="CommentContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="AuditLogs" Relationship="Self.FK_AuditLogs_Comments" FromRole="Comments" ToRole="AuditLogs" />
-          <NavigationProperty Name="CategoryItem" Relationship="Self.FK_Comments_CategoryItems" FromRole="Comments" ToRole="CategoryItems" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Comments_Users" FromRole="Comments" ToRole="Users" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -544,17 +514,6 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Genders" FromRole="Genders" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Rate">
-          <Key>
-            <PropertyRef Name="RateId" />
-          </Key>
-          <Property Name="RateId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="CategoryItemId" Type="Int32" Nullable="false" />
-          <Property Name="Score" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CategoryItem" Relationship="Self.FK_Rates_CategoryItems" FromRole="Rates" ToRole="CategoryItems" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Rates_Users" FromRole="Rates" ToRole="Users" />
-        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateId" />
@@ -574,7 +533,7 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategories_Categories" FromRole="SubCategories" ToRole="Categories" />
-          <NavigationProperty Name="CategoryItems" Relationship="Self.FK_CategoryItems_CategoryItems" FromRole="SubCategories" ToRole="CategoryItems" />
+          <NavigationProperty Name="QuestionContents" Relationship="AlphaModel.FK_QuestionContents_SubCategories" FromRole="SubCategory" ToRole="QuestionContent" />
         </EntityType>
         <EntityType Name="Title">
           <Key>
@@ -604,13 +563,13 @@
           <NavigationProperty Name="AdditionalUserInfo" Relationship="Self.FK_AdditionalUserInfos_Users" FromRole="Users" ToRole="AdditionalUserInfos" />
           <NavigationProperty Name="AgeRanx" Relationship="Self.FK_Users_AgeRanges" FromRole="Users" ToRole="AgeRanges" />
           <NavigationProperty Name="AuditLogs" Relationship="Self.FK_AuditLogs_Users" FromRole="Users" ToRole="AuditLogs" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Users" FromRole="Users" ToRole="Comments" />
           <NavigationProperty Name="DebugLogs" Relationship="Self.FK_DebugLogs_Users" FromRole="Users" ToRole="DebugLogs" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_Users_Genders" FromRole="Users" ToRole="Genders" />
-          <NavigationProperty Name="Rates" Relationship="Self.FK_Rates_Users" FromRole="Users" ToRole="Rates" />
           <NavigationProperty Name="State" Relationship="Self.FK_Users_States" FromRole="Users" ToRole="States" />
           <NavigationProperty Name="Title" Relationship="Self.FK_Users_Titles" FromRole="Users" ToRole="Titles" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_Users_UserTypes" FromRole="Users" ToRole="UserTypes" />
+          <NavigationProperty Name="Comments" Relationship="AlphaModel.FK_Comments_Users" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="QuestionContentVotes" Relationship="AlphaModel.FK_QuestionContentVotes_Users" FromRole="User" ToRole="QuestionContentVote" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -656,18 +615,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AuditLogs_Comments">
-          <End Role="Comments" Type="Self.Comment" Multiplicity="0..1" />
-          <End Role="AuditLogs" Type="Self.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comments">
-              <PropertyRef Name="CommentId" />
-            </Principal>
-            <Dependent Role="AuditLogs">
-              <PropertyRef Name="CommentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AuditLogs_Users">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="AuditLogs" Type="Self.AuditLog" Multiplicity="*" />
@@ -689,54 +636,6 @@
             </Principal>
             <Dependent Role="SubCategories">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CategoryItems_CategoryItems">
-          <End Role="SubCategories" Type="Self.SubCategory" Multiplicity="1" />
-          <End Role="CategoryItems" Type="Self.CategoryItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubCategories">
-              <PropertyRef Name="SubCategoryId" />
-            </Principal>
-            <Dependent Role="CategoryItems">
-              <PropertyRef Name="SubCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comments_CategoryItems">
-          <End Role="CategoryItems" Type="Self.CategoryItem" Multiplicity="1" />
-          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoryItems">
-              <PropertyRef Name="CategoryItemId" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="CategoryItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Rates_CategoryItems">
-          <End Role="CategoryItems" Type="Self.CategoryItem" Multiplicity="1" />
-          <End Role="Rates" Type="Self.Rate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoryItems">
-              <PropertyRef Name="CategoryItemId" />
-            </Principal>
-            <Dependent Role="Rates">
-              <PropertyRef Name="CategoryItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comments_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -773,18 +672,6 @@
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="GenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Rates_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Rates" Type="Self.Rate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Rates">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -830,12 +717,9 @@
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
           <EntitySet Name="AuditTypes" EntityType="Self.AuditType" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="CategoryItems" EntityType="Self.CategoryItem" />
-          <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="DebugLogs" EntityType="Self.DebugLog" />
           <EntitySet Name="Genders" EntityType="Self.Gender" />
-          <EntitySet Name="Rates" EntityType="Self.Rate" />
           <EntitySet Name="States" EntityType="Self.State" />
           <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
           <EntitySet Name="Titles" EntityType="Self.Title" />
@@ -853,10 +737,6 @@
             <End Role="AuditTypes" EntitySet="AuditTypes" />
             <End Role="AuditLogs" EntitySet="AuditLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_AuditLogs_Comments" Association="Self.FK_AuditLogs_Comments">
-            <End Role="Comments" EntitySet="Comments" />
-            <End Role="AuditLogs" EntitySet="AuditLogs" />
-          </AssociationSet>
           <AssociationSet Name="FK_AuditLogs_Users" Association="Self.FK_AuditLogs_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="AuditLogs" EntitySet="AuditLogs" />
@@ -864,22 +744,6 @@
           <AssociationSet Name="FK_SubCategories_Categories" Association="Self.FK_SubCategories_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="SubCategories" EntitySet="SubCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CategoryItems_CategoryItems" Association="Self.FK_CategoryItems_CategoryItems">
-            <End Role="SubCategories" EntitySet="SubCategories" />
-            <End Role="CategoryItems" EntitySet="CategoryItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comments_CategoryItems" Association="Self.FK_Comments_CategoryItems">
-            <End Role="CategoryItems" EntitySet="CategoryItems" />
-            <End Role="Comments" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rates_CategoryItems" Association="Self.FK_Rates_CategoryItems">
-            <End Role="CategoryItems" EntitySet="CategoryItems" />
-            <End Role="Rates" EntitySet="Rates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
           <AssociationSet Name="FK_States_Countries" Association="Self.FK_States_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -893,10 +757,6 @@
             <End Role="Genders" EntitySet="Genders" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rates_Users" Association="Self.FK_Rates_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Rates" EntitySet="Rates" />
-          </AssociationSet>
           <AssociationSet Name="FK_Users_States" Association="Self.FK_Users_States">
             <End Role="States" EntitySet="States" />
             <End Role="Users" EntitySet="Users" />
@@ -909,7 +769,144 @@
             <End Role="UserTypes" EntitySet="UserTypes" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Comments" EntityType="AlphaModel.Comment" />
+          <EntitySet Name="QuestionContents" EntityType="AlphaModel.QuestionContent" />
+          <EntitySet Name="QuestionContentVotes" EntityType="AlphaModel.QuestionContentVote" />
+          <AssociationSet Name="FK_AuditLogs_Comments" Association="AlphaModel.FK_AuditLogs_Comments">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="AuditLog" EntitySet="AuditLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_QuestionContents" Association="AlphaModel.FK_Comments_QuestionContents">
+            <End Role="QuestionContent" EntitySet="QuestionContents" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Users" Association="AlphaModel.FK_Comments_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionContents_SubCategories" Association="AlphaModel.FK_QuestionContents_SubCategories">
+            <End Role="SubCategory" EntitySet="SubCategories" />
+            <End Role="QuestionContent" EntitySet="QuestionContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionContentVotes_QuestionContents" Association="AlphaModel.FK_QuestionContentVotes_QuestionContents">
+            <End Role="QuestionContent" EntitySet="QuestionContents" />
+            <End Role="QuestionContentVote" EntitySet="QuestionContentVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionContentVotes_Users" Association="AlphaModel.FK_QuestionContentVotes_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="QuestionContentVote" EntitySet="QuestionContentVotes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CommentContent" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuestionContentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AuditLogs" Relationship="AlphaModel.FK_AuditLogs_Comments" FromRole="Comment" ToRole="AuditLog" />
+          <NavigationProperty Name="QuestionContent" Relationship="AlphaModel.FK_Comments_QuestionContents" FromRole="Comment" ToRole="QuestionContent" />
+          <NavigationProperty Name="User" Relationship="AlphaModel.FK_Comments_Users" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="QuestionContent">
+          <Key>
+            <PropertyRef Name="QuestionContentId" />
+          </Key>
+          <Property Name="QuestionContentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionTiltle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="AlphaModel.FK_Comments_QuestionContents" FromRole="QuestionContent" ToRole="Comment" />
+          <NavigationProperty Name="SubCategory" Relationship="AlphaModel.FK_QuestionContents_SubCategories" FromRole="QuestionContent" ToRole="SubCategory" />
+          <NavigationProperty Name="QuestionContentVotes" Relationship="AlphaModel.FK_QuestionContentVotes_QuestionContents" FromRole="QuestionContent" ToRole="QuestionContentVote" />
+        </EntityType>
+        <EntityType Name="QuestionContentVote">
+          <Key>
+            <PropertyRef Name="QuestionContentVoteId" />
+          </Key>
+          <Property Name="QuestionContentVoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionContentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuestionContent" Relationship="AlphaModel.FK_QuestionContentVotes_QuestionContents" FromRole="QuestionContentVote" ToRole="QuestionContent" />
+          <NavigationProperty Name="User" Relationship="AlphaModel.FK_QuestionContentVotes_Users" FromRole="QuestionContentVote" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AuditLogs_Comments">
+          <End Type="AlphaModel.Comment" Role="Comment" Multiplicity="0..1" />
+          <End Type="AlphaModel.AuditLog" Role="AuditLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="CommentId" />
+            </Principal>
+            <Dependent Role="AuditLog">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_QuestionContents">
+          <End Type="AlphaModel.QuestionContent" Role="QuestionContent" Multiplicity="1" />
+          <End Type="AlphaModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionContent">
+              <PropertyRef Name="QuestionContentId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="QuestionContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Users">
+          <End Type="AlphaModel.User" Role="User" Multiplicity="1" />
+          <End Type="AlphaModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionContents_SubCategories">
+          <End Type="AlphaModel.SubCategory" Role="SubCategory" Multiplicity="1" />
+          <End Type="AlphaModel.QuestionContent" Role="QuestionContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="SubCategoryId" />
+            </Principal>
+            <Dependent Role="QuestionContent">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionContentVotes_QuestionContents">
+          <End Type="AlphaModel.QuestionContent" Role="QuestionContent" Multiplicity="1" />
+          <End Type="AlphaModel.QuestionContentVote" Role="QuestionContentVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionContent">
+              <PropertyRef Name="QuestionContentId" />
+            </Principal>
+            <Dependent Role="QuestionContentVote">
+              <PropertyRef Name="QuestionContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionContentVotes_Users">
+          <End Type="AlphaModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="AlphaModel.QuestionContentVote" Role="QuestionContentVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="QuestionContentVote">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -958,30 +955,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CategoryItems">
-            <EntityTypeMapping TypeName="AlphaModel.CategoryItem">
-              <MappingFragment StoreEntitySet="CategoryItems">
-                <ScalarProperty Name="CategoryItemId" ColumnName="CategoryItemId" />
-                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-                <ScalarProperty Name="VisitedCount" ColumnName="VisitedCount" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="AlphaModel.Comment">
-              <MappingFragment StoreEntitySet="Comments">
-                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CategoryItemId" ColumnName="CategoryItemId" />
-                <ScalarProperty Name="CommentContent" ColumnName="CommentContent" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="AlphaModel.Country">
               <MappingFragment StoreEntitySet="Countries">
@@ -1008,16 +981,6 @@
               <MappingFragment StoreEntitySet="Genders">
                 <ScalarProperty Name="GenderId" ColumnName="GenderId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rates">
-            <EntityTypeMapping TypeName="AlphaModel.Rate">
-              <MappingFragment StoreEntitySet="Rates">
-                <ScalarProperty Name="RateId" ColumnName="RateId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CategoryItemId" ColumnName="CategoryItemId" />
-                <ScalarProperty Name="Score" ColumnName="Score" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1072,6 +1035,39 @@
               <MappingFragment StoreEntitySet="UserTypes">
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="AlphaModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="QuestionContentId" ColumnName="QuestionContentId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CommentContent" ColumnName="CommentContent" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionContents">
+            <EntityTypeMapping TypeName="AlphaModel.QuestionContent">
+              <MappingFragment StoreEntitySet="QuestionContents">
+                <ScalarProperty Name="QuestionDetail" ColumnName="QuestionDetail" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="QuestionTiltle" ColumnName="QuestionTiltle" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="QuestionContentId" ColumnName="QuestionContentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionContentVotes">
+            <EntityTypeMapping TypeName="AlphaModel.QuestionContentVote">
+              <MappingFragment StoreEntitySet="QuestionContentVotes">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="QuestionContentId" ColumnName="QuestionContentId" />
+                <ScalarProperty Name="QuestionContentVoteId" ColumnName="QuestionContentVoteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

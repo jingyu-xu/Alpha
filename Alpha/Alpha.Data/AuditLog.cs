@@ -21,7 +21,7 @@ namespace Alpha.Data
         public System.DateTime DateCreated { get; set; }
     
         public virtual AuditType AuditType { get; set; }
-        public virtual Comment Comment { get; set; }
         public virtual User User { get; set; }
+        public virtual Comment Comment { get; set; }
     }
 }

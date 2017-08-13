@@ -12,27 +12,26 @@ namespace Alpha.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class CategoryItem
+    public partial class QuestionContent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CategoryItem()
+        public QuestionContent()
         {
             this.Comments = new HashSet<Comment>();
-            this.Rates = new HashSet<Rate>();
+            this.QuestionContentVotes = new HashSet<QuestionContentVote>();
         }
     
-        public int CategoryItemId { get; set; }
+        public int QuestionContentId { get; set; }
         public int SubCategoryId { get; set; }
-        public string Title { get; set; }
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        public int VisitedCount { get; set; }
+        public string QuestionTiltle { get; set; }
         public System.DateTime DateCreated { get; set; }
+        public string Answer { get; set; }
+        public string QuestionDetail { get; set; }
     
-        public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rate> Rates { get; set; }
+        public virtual ICollection<QuestionContentVote> QuestionContentVotes { get; set; }
     }
 }

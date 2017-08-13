@@ -22,13 +22,13 @@ namespace Alpha.Data
     
         public int CommentId { get; set; }
         public int UserId { get; set; }
-        public int CategoryItemId { get; set; }
         public string CommentContent { get; set; }
         public System.DateTime DateCreated { get; set; }
+        public int QuestionContentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuditLog> AuditLogs { get; set; }
-        public virtual CategoryItem CategoryItem { get; set; }
+        public virtual QuestionContent QuestionContent { get; set; }
         public virtual User User { get; set; }
     }
 }

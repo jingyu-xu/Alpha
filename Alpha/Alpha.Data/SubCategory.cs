@@ -17,7 +17,7 @@ namespace Alpha.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SubCategory()
         {
-            this.CategoryItems = new HashSet<CategoryItem>();
+            this.QuestionContents = new HashSet<QuestionContent>();
         }
     
         public int SubCategoryId { get; set; }
@@ -26,6 +26,6 @@ namespace Alpha.Data
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoryItem> CategoryItems { get; set; }
+        public virtual ICollection<QuestionContent> QuestionContents { get; set; }
     }
 }

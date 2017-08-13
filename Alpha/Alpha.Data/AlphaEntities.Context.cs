@@ -30,16 +30,16 @@ namespace Alpha.Data
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
         public virtual DbSet<AuditType> AuditTypes { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CategoryItem> CategoryItems { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<DebugLog> DebugLogs { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
-        public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<Title> Titles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<QuestionContent> QuestionContents { get; set; }
+        public virtual DbSet<QuestionContentVote> QuestionContentVotes { get; set; }
     }
 }

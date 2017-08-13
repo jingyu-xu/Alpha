@@ -66,16 +66,16 @@
     <Build Include="dbo\Tables\Titles.sql" />
     <Build Include="dbo\Tables\SubCategories.sql" />
     <Build Include="dbo\Tables\States.sql" />
-    <Build Include="dbo\Tables\Rates.sql" />
     <Build Include="dbo\Tables\Genders.sql" />
     <Build Include="dbo\Tables\DebugLogs.sql" />
     <Build Include="dbo\Tables\Countries.sql" />
     <Build Include="dbo\Tables\Comments.sql" />
-    <Build Include="dbo\Tables\CategoryItems.sql" />
     <Build Include="dbo\Tables\Categories.sql" />
     <Build Include="dbo\Tables\AuditTypes.sql" />
     <Build Include="dbo\Tables\AuditLogs.sql" />
     <Build Include="dbo\Tables\AgeRanges.sql" />
     <Build Include="dbo\Tables\AdditionalUserInfos.sql" />
+    <Build Include="dbo\Tables\QuestionContentVotes.sql" />
+    <Build Include="dbo\Tables\QuestionContents.sql" />
   </ItemGroup>
 </Project>
